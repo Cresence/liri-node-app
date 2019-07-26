@@ -1,4 +1,3 @@
-const dotenv = require('dotenv').config();
 const axios = require('axios');
 const inquirer = require('inquirer');
 const saved = [];
@@ -43,29 +42,31 @@ const movieSearch = async () => {
             message:"What movie do you want to search for?"
         }
     ])
-    
+
+
+    if (inquiry.movie === ''){
+        console.log(`If you haven't watched "Mr. Nobody," then you should: <http://www.imdb.com/title/tt0485947/>`)
+    }else{
     // Then run a request with axios to the OMDB API with the movie specified
-    queryUrl = "http://www.omdbapi.com/?t=" + inquiry.movie + "&y=&plot=short&apikey=trilogy";
+        queryUrl = "http://www.omdbapi.com/?t=" + inquiry.movie + "&y=&plot=short&apikey=trilogy";
 
 
-     // This line is just to help us debug against the actual URL.
-    // console.log(queryUrl);
-    
-    // Then create a request with axios to the queryUrl
-    // ...
+         // This line is just to help us debug against the actual URL.
+        // console.log(queryUrl);
+        
+        // Then create a request with axios to the queryUrl
+        // ...
 
-    axios.get(queryUrl).then(function(response){
-    
-        // const {name, Year, plot} = response.data;
-    
-        // If the request with axios is successful
-        console.log('It worked! See response below:');
-        console.log(response.data);
-        // console.log(name);
-        // console.log(Year);
-        // console.log(plot);
-    });
-
+        axios.get(queryUrl).then(function(response){
+        
+            const {Title, Year, imdbRating, pH, Country, Language, Plot, Actors} = response.data;
+        
+            // If the request with axios is successful
+            console.log('It worked! See movie info below:');
+            console.log(`Title: ${Title}\nYear: ${Year}\nIMDB Rating: ${imdbRating}\nRotten Tomatoes Rating: ${pH}\nCountry: ${Country}\nLanguage: ${Language}\nPlot: ${Plot}\nActors: ${Actors}`);
+            console.log('Thanks for using Liri!');
+        });
+    }
 }
 
 
