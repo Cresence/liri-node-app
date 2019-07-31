@@ -11,5 +11,3 @@
 # Redo "Step: 2" for additional search inquiries.
 
 # See video here: https://imgur.com/a/XbaHZQe
-
-# <blockquote class="imgur-embed-pub" lang="en" data-id="a/XbaHZQe" data-context="false" ><a href="//imgur.com/a/XbaHZQe"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
