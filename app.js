@@ -105,7 +105,7 @@ const songSearch = async () => {
             query: song,
             limit: 5
         }).then(function(response) {
-            console.log(`-----\nAlbum: ${response.tracks.items[0].album.name}\nArtists: ${response.tracks.items[0].album.artists.name}Track Number: ${response.tracks.items[0].track_number}\nTrack: ${response.tracks.items[0].name}\n-----`);
+            console.log(`-----\nAlbum: ${response.tracks.items[0].album.name}\nArtists: ${response.tracks.items[0].artists[0].name}Track Number: ${response.tracks.items[0].track_number}\nTrack: ${response.tracks.items[0].name}\n-----`);
             console.log('Thanks for using Liri!\nLoad the app again for additional searches! (TEMP)');
         }).catch(function(err) {
             console.log(err + "Something didn't work. Try again");
