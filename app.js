@@ -21,7 +21,7 @@ const askQuestion = function () {
             name:"question",
             type:"list",
             message:"Insert search category",
-            choices: ["song", "movie", "concert"]
+            choices: ["song", "movie", "concert", "exit"]
         }
     ]).then(function(response){
         if (response.question === "song") {
@@ -48,6 +48,8 @@ const askQuestion = function () {
                 console.log("Something didn't work. Try again.\n-----");
                 askQuestion();
             }
+        } else {
+            console.log("Bye, bye!");
         }
     });
 };
@@ -64,8 +66,9 @@ const movieSearch = async () => {
 
     if (inquiry.movie === ''){
         console.log(`-----\nWell, I'm not a mind reader but...\nIf you haven't watched "Mr. Nobody," then you should: <http://www.imdb.com/title/tt0485947/>\n-----`);
-        console.log('Thanks for using Liri!\nLoad the app again to search again!\n-----');
-    }else{
+        console.log('Thanks for using Liri!\nFeel free to search again! >exit (if done searching)');
+        askQuestion();
+        } else{
     // Then run a request with axios to the OMDB API with the movie specified
         queryUrl = "http://www.omdbapi.com/?t=" + inquiry.movie + "&y=&plot=short&apikey=trilogy";
 
@@ -83,7 +86,7 @@ const movieSearch = async () => {
             // If the request with axios is successful
             console.log('It worked! See movie info below:');
             console.log(`-----\nTitle: ${Title}\nYear: ${Year}\nIMDB Rating: ${imdbRating}\nRotten Tomatoes Rating: ${pH}\nCountry: ${Country}\nLanguage: ${Language}\nPlot: ${Plot}\nActors: ${Actors}\n-----`);
-            console.log('Thanks for using Liri!\nLoad the app again for additional searches! (TEMP)');
+            console.log('Thanks for using Liri!\nFeel free to search again! >exit (if done searching)');            askQuestion()
         });
     }
 }
@@ -106,7 +109,8 @@ const songSearch = async () => {
             limit: 5
         }).then(function(response) {
             console.log(`-----\nAlbum: ${response.tracks.items[0].album.name}\nArtists: ${response.tracks.items[0].artists[0].name}Track Number: ${response.tracks.items[0].track_number}\nTrack: ${response.tracks.items[0].name}\n-----`);
-            console.log('Thanks for using Liri!\nLoad the app again for additional searches! (TEMP)');
+            console.log('Thanks for using Liri!\nFeel free to search again! >exit (if done searching)');
+            askQuestion()
         }).catch(function(err) {
             console.log(err + "Something didn't work. Try again");
             songSearch();
@@ -151,6 +155,7 @@ const concertSearch = async () => {
                 // let date = datetime3.substring(0,10);
                 // let convertedSongDate3 = moment(date, "YYYY/MM/DD");
                 console.log(`-----\nVenue Name: ${venue.name}\nCountry: ${venue.country}, City: ${venue.city}\nDate of Concert: ${convertedSongDate.format("MM/DD/YYYY")}`);
+                askQuestion()
                 // console.log(`Venue Name: ${venue2.name}\nCountry: ${venue2.country}, City: ${venue2.city}\nDate of Concert: ${convertedSongDate2.format("MM/DD/YYYY")}`);
                 // console.log(`Venue Name: ${venue3.name}\nCountry: ${venue3.country}, City: ${venue3.city}\nDate of Concert: ${convertedSongDate3.format("MM/DD/YYYY")}\n-----`);
             } catch {
